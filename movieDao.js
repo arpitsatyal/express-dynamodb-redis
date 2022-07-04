@@ -1,6 +1,6 @@
-import * as dbModel from './dynamoCrud';
+import * as dbModel from "./dynamoCrud";
 
-const TABLE_NAME = 'Movies';
+const TABLE_NAME = "Movies";
 
 /**
  * Fetch All Movies From DB.
@@ -9,7 +9,7 @@ const TABLE_NAME = 'Movies';
  */
 export function fetchAll() {
   const params = {
-    TableName: TABLE_NAME
+    TableName: TABLE_NAME,
   };
 
   return dbModel.getAll(params);
@@ -24,13 +24,13 @@ export function fetchAll() {
 export function fetchByYear(filter) {
   const params = {
     TableName: TABLE_NAME,
-    KeyConditionExpression: '#yr = :yyyy',
+    KeyConditionExpression: "#yr = :yyyy",
     ExpressionAttributeNames: {
-      '#yr': 'year'
+      "#yr": "year",
     },
     ExpressionAttributeValues: {
-      ':yyyy': filter
-    }
+      ":yyyy": filter,
+    },
   };
 
   return dbModel.query(params);
@@ -47,8 +47,8 @@ export function fetchByYearAndTitle(filter) {
     TableName: TABLE_NAME,
     Key: {
       year: filter.year,
-      title: filter.title
-    }
+      title: filter.title,
+    },
   };
 
   return dbModel.get(params);
@@ -63,7 +63,7 @@ export function fetchByYearAndTitle(filter) {
 export function create(data) {
   const params = {
     TableName: TABLE_NAME,
-    Item: { ...data }
+    Item: { ...data },
   };
 
   return dbModel.create(params);
@@ -78,20 +78,19 @@ export function create(data) {
  * @returns
  */
 export function update(year, title, data) {
-  const info = data.info || {};
   const params = {
     TableName: TABLE_NAME,
     Key: {
-      year,
-      title
+     year, title
     },
-    UpdateExpression: 'set info = :i',
+    UpdateExpression: "set genre = :t",
+   
     ExpressionAttributeValues: {
-      ':i': info
+      ":t": data.genre
     },
-    ReturnValues: 'UPDATED_NEW'
+    ReturnValues: "UPDATED_NEW",
   };
-
+ 
   return dbModel.update(params);
 }
 
@@ -107,8 +106,8 @@ export function remove(year, title) {
     TableName: TABLE_NAME,
     Key: {
       year,
-      title
-    }
+      title,
+    },
   };
 
   return dbModel.remove(params);
