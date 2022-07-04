@@ -1,13 +1,19 @@
 import express from "express";
-import { create, fetchAll, fetchByYear, remove, update } from "./movieController";
+import {
+  create,
+  fetchAll,
+  fetchByYear,
+  findByGenre,
+  remove,
+  update,
+} from "./movieController";
 
 const router = new express.Router();
 
 router.route("/movies").get(fetchAll).post(create);
 
-router.route("/movies/:year").get(fetchByYear)
+router.route("/movies/:year").get(fetchByYear).put(update).delete(remove);
 
-router.put("/movies/:year/:title", update)
-router.delete("/movies/:year/:title", remove)
+router.get("/movies-genre", findByGenre);
 
 export default router;

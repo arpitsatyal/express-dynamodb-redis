@@ -53,21 +53,15 @@ export function fetchByYear(year) {
 }
 
 export function create(params) {
-  return movieDB
-    .create(params)
-    .then(() => {})
-    .catch((err) => console.log(err));
+  return movieDB.create(params).catch((err) => console.log(err));
 }
 
-export function update(year, title, body) {
-  return movieDB
-    .update(year, title, body)
-    .then(() => {})
-    .catch((err) => console.log(err));
+export function update(year, body) {
+  return movieDB.update(year, body).catch((err) => console.log(err));
 }
 
-export async function remove(year, title) {
-  const data = await movieDB.remove(year, title);
+export async function remove(year) {
+  const data = await movieDB.remove(year);
   console.log("after delete", data);
   return data;
 }

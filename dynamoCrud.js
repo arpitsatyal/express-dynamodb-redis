@@ -1,4 +1,4 @@
-const { dynamoDB, dynamoDBDocClient }  = require('./db')
+const { dynamoDB, dynamoDBDocClient } = require("./dbConnection");
 
 /**
  * DynamoDB Common Get All Service.
@@ -6,7 +6,7 @@ const { dynamoDB, dynamoDBDocClient }  = require('./db')
  * @param {*} params
  * @returns {Promise}
  */
- function getAll(params) {
+function getAll(params) {
   return new Promise((resolve, reject) => {
     dynamoDBDocClient.scan(params, (err, data) => {
       if (err) {
@@ -96,7 +96,7 @@ function remove(params) {
  * @param {*} params
  * @returns {Promise}
  */
- function query(params) {
+function query(params) {
   return new Promise((resolve, reject) => {
     dynamoDBDocClient.query(params, (err, data) => {
       if (err) {
@@ -114,7 +114,7 @@ function remove(params) {
  * @param {*} params
  * @returns {Promise}
  */
- function createTable(params) {
+function createTable(params) {
   return new Promise((resolve, reject) => {
     dynamoDB.createTable(params, (err, data) => {
       if (err) {
@@ -145,5 +145,12 @@ function removeTable(params) {
 }
 
 module.exports = {
-  createTable, removeTable, remove, update, create, query, get, getAll
-}
+  createTable,
+  removeTable,
+  remove,
+  update,
+  create,
+  query,
+  get,
+  getAll,
+};

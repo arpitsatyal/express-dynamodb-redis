@@ -77,20 +77,20 @@ export function create(data) {
  * @param {*} data {info}.
  * @returns
  */
-export function update(year, title, data) {
+export function update(year, data) {
   const params = {
     TableName: TABLE_NAME,
     Key: {
-     year, title
+      year,
     },
-    UpdateExpression: "set genre = :t",
-   
+    UpdateExpression: "set genre = :g",
+
     ExpressionAttributeValues: {
-      ":t": data.genre
+      ":g": data.genre,
     },
     ReturnValues: "UPDATED_NEW",
   };
- 
+
   return dbModel.update(params);
 }
 
@@ -101,12 +101,11 @@ export function update(year, title, data) {
  * @param {*} title
  * @returns
  */
-export function remove(year, title) {
+export function remove(year) {
   const params = {
     TableName: TABLE_NAME,
     Key: {
       year,
-      title,
     },
   };
 
