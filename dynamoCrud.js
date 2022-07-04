@@ -37,60 +37,6 @@ function get(params) {
 }
 
 /**
- * DynamoDB Create Table Service.
- *
- * @param {*} params
- * @returns {Promise}
- */
-function createTable(params) {
-  return new Promise((resolve, reject) => {
-    dynamoDB.createTable(params, (err, data) => {
-      if (err) {
-        return reject(err);
-      }
-
-      return resolve(data);
-    });
-  });
-}
-
-/**
- * DynamoDB Remove Table Service.
- *
- * @param {*} params
- * @returns {Promise}
- */
-function removeTable(params) {
-  return new Promise((resolve, reject) => {
-    dynamoDB.deleteTable(params, (err, data) => {
-      if (err) {
-        return reject(err);
-      }
-
-      return resolve(data);
-    });
-  });
-}
-
-/**
- * DynamoDB Common Query Service.
- *
- * @param {*} params
- * @returns {Promise}
- */
-function query(params) {
-  return new Promise((resolve, reject) => {
-    dynamoDBDocClient.query(params, (err, data) => {
-      if (err) {
-        return reject(err);
-      }
-
-      return resolve(data);
-    });
-  });
-}
-
-/**
  * DynamoDB Common Create Service.
  *
  * @param {*} params
@@ -135,6 +81,60 @@ function update(params) {
 function remove(params) {
   return new Promise((resolve, reject) => {
     dynamoDBDocClient.delete(params, (err, data) => {
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve(data);
+    });
+  });
+}
+
+/**
+ * DynamoDB Common Query Service.
+ *
+ * @param {*} params
+ * @returns {Promise}
+ */
+ function query(params) {
+  return new Promise((resolve, reject) => {
+    dynamoDBDocClient.query(params, (err, data) => {
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve(data);
+    });
+  });
+}
+
+/**
+ * DynamoDB Create Table Service.
+ *
+ * @param {*} params
+ * @returns {Promise}
+ */
+ function createTable(params) {
+  return new Promise((resolve, reject) => {
+    dynamoDB.createTable(params, (err, data) => {
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve(data);
+    });
+  });
+}
+
+/**
+ * DynamoDB Remove Table Service.
+ *
+ * @param {*} params
+ * @returns {Promise}
+ */
+function removeTable(params) {
+  return new Promise((resolve, reject) => {
+    dynamoDB.deleteTable(params, (err, data) => {
       if (err) {
         return reject(err);
       }

@@ -9,6 +9,16 @@ export async function fetchAll(req, res, next) {
   }
 }
 
+export async function fetchByYear(req, res, next) {
+    const year = parseInt(req.params.year);
+    try {
+      const data = await movieService.fetchByYear(year);
+      res.json(data);
+    } catch (e) {
+      next(e);
+    }
+  }
+  
 export async function create(req, res, next) {
   try {
     await movieService.create(req.body);
@@ -17,3 +27,4 @@ export async function create(req, res, next) {
     next(e);
   }
 }
+

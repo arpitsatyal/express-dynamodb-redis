@@ -29,7 +29,7 @@ export function fetchByYear(filter) {
       '#yr': 'year'
     },
     ExpressionAttributeValues: {
-      ':yyyy': filter.year
+      ':yyyy': filter
     }
   };
 

@@ -1,4 +1,4 @@
-const dbModel = require("./dbModel");
+const dbModel = require('./dynamoCrud');
 
 const TABLE_NAME = "Movies";
 
