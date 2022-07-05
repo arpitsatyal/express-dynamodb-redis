@@ -57,16 +57,16 @@ export async function findByGenre(req, res, next) {
     const params = {
       TableName: "Movies",
       KeyConditionExpression: "#pk = :pk",
-      FilterExpression: "#g = :g",
+      FilterExpression: "contains(info.genres, :g)",
       ExpressionAttributeNames: {
         "#pk": "year",
-        "#g": "genre",
       },
       ExpressionAttributeValues: {
         ":pk": parseInt(year),
         ":g": genre,
       },
     };
+
     const { Items = [] } = await dynamoDBDocClient.query(params).promise();
     res.json(Items);
   } catch (e) {

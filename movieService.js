@@ -53,11 +53,11 @@ export function fetchByYear(year) {
 }
 
 export function create(params) {
-  return movieDB.create(params).catch((err) => console.log(err));
+  return movieDB.create(params).catch((err) => err);
 }
 
 export function update(year, body) {
-  return movieDB.update(year, body).catch((err) => console.log(err));
+  return movieDB.update(year, body).catch((err) => err);
 }
 
 export async function remove(year) {
