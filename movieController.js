@@ -52,10 +52,14 @@ export async function remove(req, res, next) {
 }
 
 export async function findByGenre(req, res, next) {
-  const { year, genre } = req.query;
+  const { year, genre, limit } = req.query;
+
+  let result, accumulated, ExclusiveStartKey;
   try {
     const params = {
       TableName: "Movies",
+      ExclusiveStartKey,
+      Limit: parseInt(limit) || 5,
       KeyConditionExpression: "#pk = :pk",
       FilterExpression: "contains(info.genres, :g)",
       ExpressionAttributeNames: {
@@ -66,9 +70,14 @@ export async function findByGenre(req, res, next) {
         ":g": genre,
       },
     };
+    do {
+      result = await dynamoDBDocClient.query(params).promise();
 
-    const { Items = [] } = await dynamoDBDocClient.query(params).promise();
-    res.json(Items);
+      ExclusiveStartKey = result.LastEvaluatedKey;
+      accumulated = result.Items;
+      return res.json(accumulated);
+      
+    } while (result.Items.length || result.LastEvaluatedKey);
   } catch (e) {
     next(e);
   }

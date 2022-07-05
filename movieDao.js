@@ -9,7 +9,7 @@ const TABLE_NAME = "Movies";
  */
 export function fetchAll() {
   const params = {
-    TableName: TABLE_NAME,
+    TableName: TABLE_NAME
   };
 
   return dbModel.getAll(params);
